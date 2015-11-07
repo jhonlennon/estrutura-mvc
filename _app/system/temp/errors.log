@@ -1,0 +1,27 @@
+[01-Aug-2015 10:32:58 America/Sao_Paulo] PHP Fatal error:  Call to undefined function get_all_paths() in E:\_WampServer_\www\_FrameWork_\index.inc.php on line 22
+[01-Aug-2015 10:32:58 America/Sao_Paulo] PHP Stack trace:
+[01-Aug-2015 10:32:58 America/Sao_Paulo] PHP   1. {main}() E:\_WampServer_\www\_FrameWork_\public_html\index.php:0
+[01-Aug-2015 10:32:58 America/Sao_Paulo] PHP   2. APP::Initialize() E:\_WampServer_\www\_FrameWork_\public_html\index.php:152
+[01-Aug-2015 10:32:58 America/Sao_Paulo] PHP   3. APP::setController() E:\_WampServer_\www\_FrameWork_\system\core\APP.class.php:244
+[01-Aug-2015 10:32:58 America/Sao_Paulo] PHP   4. APP::getInstanceController() E:\_WampServer_\www\_FrameWork_\system\core\APP.class.php:173
+[01-Aug-2015 10:32:58 America/Sao_Paulo] PHP   5. APP::getInstance() E:\_WampServer_\www\_FrameWork_\system\core\APP.class.php:60
+[01-Aug-2015 10:32:58 America/Sao_Paulo] PHP   6. __autoload() E:\_WampServer_\www\_FrameWork_\system\core\APP.class.php:81
+[01-Aug-2015 10:32:58 America/Sao_Paulo] PHP   7. _file_exists() E:\_WampServer_\www\_FrameWork_\index.inc.php:39
+[01-Aug-2015 10:33:06 America/Sao_Paulo] PHP Fatal error:  Call to undefined function get_all_paths() in E:\_WampServer_\www\_FrameWork_\index.inc.php on line 22
+[01-Aug-2015 10:33:06 America/Sao_Paulo] PHP Stack trace:
+[01-Aug-2015 10:33:06 America/Sao_Paulo] PHP   1. {main}() E:\_WampServer_\www\_FrameWork_\public_html\index.php:0
+[01-Aug-2015 10:33:06 America/Sao_Paulo] PHP   2. APP::Initialize() E:\_WampServer_\www\_FrameWork_\public_html\index.php:152
+[01-Aug-2015 10:33:06 America/Sao_Paulo] PHP   3. APP::setController() E:\_WampServer_\www\_FrameWork_\system\core\APP.class.php:244
+[01-Aug-2015 10:33:06 America/Sao_Paulo] PHP   4. APP::getInstanceController() E:\_WampServer_\www\_FrameWork_\system\core\APP.class.php:173
+[01-Aug-2015 10:33:06 America/Sao_Paulo] PHP   5. APP::getInstance() E:\_WampServer_\www\_FrameWork_\system\core\APP.class.php:60
+[01-Aug-2015 10:33:06 America/Sao_Paulo] PHP   6. __autoload() E:\_WampServer_\www\_FrameWork_\system\core\APP.class.php:81
+[01-Aug-2015 10:33:06 America/Sao_Paulo] PHP   7. _file_exists() E:\_WampServer_\www\_FrameWork_\index.inc.php:39
+[01-Aug-2015 10:33:27 America/Sao_Paulo] PHP Fatal error:  Call to undefined function get_all_paths() in E:\_WampServer_\www\_FrameWork_\index.inc.php on line 22
+[01-Aug-2015 10:33:27 America/Sao_Paulo] PHP Stack trace:
+[01-Aug-2015 10:33:27 America/Sao_Paulo] PHP   1. {main}() E:\_WampServer_\www\_FrameWork_\public_html\index.php:0
+[01-Aug-2015 10:33:27 America/Sao_Paulo] PHP   2. APP::Initialize() E:\_WampServer_\www\_FrameWork_\public_html\index.php:152
+[01-Aug-2015 10:33:27 America/Sao_Paulo] PHP   3. APP::setController() E:\_WampServer_\www\_FrameWork_\system\core\APP.class.php:244
+[01-Aug-2015 10:33:27 America/Sao_Paulo] PHP   4. APP::getInstanceController() E:\_WampServer_\www\_FrameWork_\system\core\APP.class.php:173
+[01-Aug-2015 10:33:27 America/Sao_Paulo] PHP   5. APP::getInstance() E:\_WampServer_\www\_FrameWork_\system\core\APP.class.php:60
+[01-Aug-2015 10:33:27 America/Sao_Paulo] PHP   6. __autoload() E:\_WampServer_\www\_FrameWork_\system\core\APP.class.php:81
+[01-Aug-2015 10:33:27 America/Sao_Paulo] PHP   7. _file_exists() E:\_WampServer_\www\_FrameWork_\index.inc.php:39

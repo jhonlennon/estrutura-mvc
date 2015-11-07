@@ -1,0 +1,14 @@
+###### Forçando www.
+RewriteEngine On
+RewriteCond %{HTTP_HOST} !^www\.
+RewriteCond %{HTTP_HOST} !^.*?\.lifeweb\.
+RewriteCond %{HTTP_HOST} !^.*?[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3} 
+RewriteCond %{HTTP_HOST} !^localhost
+RewriteRule ^ http://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Url amigável
+RewriteEngine on
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME} !\.[a-zA-Z0-9]{2,5}$
+RewriteRule ^(.*)$ index.php?GET_VARS=$1
