@@ -46,7 +46,7 @@
      * @param array $merge
      * @return array
      */
-    function extend(array $initial, array $merge) {
+    function extend(array $initial = null, array $merge = null) {
 	if ($merge and $initial) {
 	    foreach ($merge as $key => $value) {
 		if (is_int($key)) {
@@ -511,5 +511,48 @@
 	}
 
 	return $idade;
+    }
+
+    /**
+     * Executa um pesquisa na base de dados e retorna os registros encontrados
+     * @param string $query
+     * @param array $values
+     * @return array[]
+     */
+    function sql_select($query, array $values = null) {
+	return (new Read)->FullRead($query, $values)->getResult();
+    }
+
+    /**
+     * Insere registros a base de dados
+     * @param string $table
+     * @param array $dados
+     * @return int|false
+     */
+    function sql_insert($table, array $dados) {
+	return (new Create)->ExeCreate($table, $dados)->getResult();
+    }
+
+    /**
+     * Deleta registros da base de dados
+     * @param string $table
+     * @param string $termos
+     * @param array $dados
+     * @return boolean
+     */
+    function sql_delete($table, $termos = null, array $dados = null) {
+	return (new Delete)->ExeDelete($table, $termos, $dados)->getResult();
+    }
+
+    /**
+     * Atualiza registros da base de dados
+     * @param string $table
+     * @param array $dados
+     * @param string $termos
+     * @param array $places
+     * @return boolean
+     */
+    function sql_update($table, array $dados, $termos = null, array $places = null) {
+	return (new Update)->ExeUpdate($table, $dados, $termos, $places)->getResult();
     }
     

@@ -43,7 +43,7 @@
          * @return Object
          */
         function setHeader($Content, array $Attrs = null) {
-            return $this->_setContent($this->Header, $Content, $Attrs);
+            return $this->_setContent($this->Header, (string) $Content, $Attrs);
         }
 
         /**
@@ -53,7 +53,7 @@
          * @return Object
          */
         function setBody($Content, array $Attrs = null) {
-            return $this->_setContent($this->Body, $Content, $Attrs);
+            return $this->_setContent($this->Body, (string) $Content, $Attrs);
         }
 
         /**
@@ -63,7 +63,7 @@
          * @return Object
          */
         function setFooter($Content, array $Attrs = null) {
-            return $this->_setContent($this->Footer, $Content, $Attrs);
+            return $this->_setContent($this->Footer, (string) $Content, $Attrs);
         }
 
         /**

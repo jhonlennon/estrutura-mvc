@@ -601,13 +601,13 @@ function apply_masks(Container) {
 
         // Configurações
         fn.config = $.extend({
-            form: this,
+            form: this.is('form') ? this : '<form />',
+            formSearch: '<form />',
             controller: CONTROLLER,
             actionInsert: 'insert',
             actionUpdate: 'update',
             actionDelete: 'excluir',
             actionSelect: 'list',
-            actionEdit: 'edit',
             actionStatus: 'status',
             actionVisible: 'visible',
             container: undefined,
@@ -912,7 +912,6 @@ function apply_masks(Container) {
         // Editando
         fn.container.on('click', '[data-editar]', function () {
             fn.config.form.setValues($(this).attr('data-editar'));
-            fn.trigger('actionEdit', [this]);
         });
 
         // Excluir
@@ -1051,10 +1050,13 @@ function apply_masks(Container) {
             var w = modalIframe('Geolocalização', url('mapa') + '?' + parans);
 
             w.on('closed', function () {
-                var p = modalGetPosition();
-                form.find('[name=latitude]').prop('value', p.latitude);
-                form.find('[name=longitude]').prop('value', p.longitude);
-                form.find('[name=zoom]').prop('value', p.zoom);
+                var p = w.find('iframe')[0].contentWindow.getPosition;
+                if (typeof p != 'undefined' && $.isFunction(p)) {
+                    p = p();
+                    form.find('[name=latitude]').prop('value', p.latitude);
+                    form.find('[name=longitude]').prop('value', p.longitude);
+                    form.find('[name=zoom]').prop('value', p.zoom);
+                }
             });
 
         })

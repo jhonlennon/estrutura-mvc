@@ -83,7 +83,7 @@
 	public static function getInstance($NameClass, $Path = null, array $Parametros = []) {
 
 	    # Chave da instancia
-	    $key = strtolower($NameClass);
+	    $key = $NameClass;
 
 	    if (isset(self::$Instances[$key])) {
 		return self::$Instances[$key];
