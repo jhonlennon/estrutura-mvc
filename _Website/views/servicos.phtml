@@ -1,0 +1,14 @@
+<div class="container" >
+    <section>
+	<h1 class="page-title" >Serviços</h1>
+	<div class="row" >
+	    <div class="col-md-10 col-md-offset-1" >
+		<?php
+		    foreach ($servicos as $v) {
+			view_load('tpl/servico', ['v' => $v]);
+		    }
+		?>
+	    </div>
+	</div>
+    </section>
+</div>

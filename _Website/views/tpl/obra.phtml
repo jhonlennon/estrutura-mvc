@@ -1,0 +1,21 @@
+<article class="tpl-servico tpl-obra" title="<?= htmlspecialchars($v->getTitle()) ?>" >
+    <div class="tpl-servico-content" >
+	<div class="row" >
+	    <div class="col-md-2" >
+		<a <?php
+		    $link = $v->getTexto() ? url('obras/ver', [$v->getId(), $v->getTitle()]) : null;
+		    if ($link) {
+			echo 'href="' . $link . '"';
+		    }
+		?> >
+		    <img src="<?= $v->imgCapa()->getSource(true) ?>" class="img-responsive" />
+		</a>
+		<div class="divider-10" ></div>
+	    </div>
+	    <div class="col-md-10" >
+		<h1 class="tpl-servico-title" ><a <?php if ($link) echo 'href="' . $link . '"'; ?> ><?= $v->getTitle() ?></a></h1>
+		<?= substr(strip_tags($v->getTexto()), 0, 250) ?>...
+	    </div>
+	</div>
+    </div>
+</article>

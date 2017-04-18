@@ -1,0 +1,23 @@
+<form class="form-chegar" data-fgmap="#mapa" >
+    <div class="row" >
+	<div class="col-xs-10 col-xs-offset-1" >
+	    <div class="col-sm-4 text-right hidden-xs" >
+		<p>Saiba como chegar</p>
+	    </div>
+	    <div class="col-sm-8" >
+		<div class="input-group" >
+		    <input type="text" name="endereco" placeholder="Digite o seu cep ou endereço" required="" class="form-control" />
+		    <div class="input-group-btn" >
+			<button class="btn btn-default" >
+			    <i class="fa fa-search" ></i>
+			</button>
+		    </div>
+		</div>
+	    </div>
+	</div>
+    </div>
+</form>
+<div id="mapa" style="height: 400px;" data-gmap="<?php
+	 $site = newModel('SiteConfig')->get();
+	 echo "{$site->getLatitude()},{$site->getLongitude()},{$site->getZoom()}";
+     ?>" ></div>

@@ -1,0 +1,79 @@
+<p class="text-center" >Deixe seu currículo, que entraremos em contato.<br>Todos os campos são obrigatórios.</p>
+
+<?=
+    form_open([
+	'data-adminpage' => [
+	    'controller' => 'contato',
+	    'actionInsert' => 'trabalhe_send',
+	    'alertSuccess' => true,
+	    'autoReset' => true,
+	    'autoSearch' => false,
+	]
+    ]);
+?>
+
+<input type="text" name="nome1" class="hide" />
+<input type="hidden" name="nome2" />
+
+<h3>Dados pessoais</h3>
+
+<div class="form-group" ><label>Nome</label><input type="text" name="nome" class="form-control"></div>
+
+<div class="row">
+    <div class="form-group col-md-4"><label>Telefone</label><input type="text" name="telefone" class="mask-telefone form-control"></div>
+    <div class="form-group col-md-8"><label>E-mail</label><input type="email" name="email" class="form-control"></div>
+</div>
+
+<div class="row">
+    <div class="form-group col-md-3" ><label>CEP</label><input type="text" name="cep" class="mask-cep text-center form-control"></div>
+    <div class="form-group col-md-7"><label>Endereço</label><input type="text" name="endereco" class="form-control"></div>
+    <div class="form-group col-md-2"><label>Número</label><input type="text" name="numero" class="form-control"></div>
+</div>
+
+<div class="row">
+    <div class="form-group col-md-10" ><label>Cidade</label><input type="text" name="cidade" class="form-control" /></div>
+    <div class="form-group col-md-2" ><label>UF</label><input type="text" name="uf" class="form-control" /></div>
+</div>
+
+<h3>Escolaridade</h3>
+
+<div class="row">
+    <div class="form-group col-md-7"><label>Curso</label><input type="text" name="es_curso" class="form-control"></div>
+    <div class="form-group col-md-5"><label>Instituição</label><input type="text" name="es_instituicao" class="form-control"></div>
+</div>
+
+<div class="row">
+    <div class="form-group col-md-4"><label>Grau</label><input type="text" name="es_grau" class="form-control"></div>
+    <div class="form-group col-md-8"><label>Situação</label><input type="text" name="es_situacao" class="form-control"></div>
+</div>
+
+<div class="form-group" ><label>Conhecimento em línguas estrangeiras?</label><textarea name="es_linguas" class="form-control"></textarea></div>
+
+<h3>Experiência Profissional</h3>
+
+<div class="form-group" ><label>Empresa</label><input type="text" name="ex_empresa" class="form-control"></div>
+
+<div class="row">
+    <div class="form-group col-md-7"><label>Cargo</label><input type="text" name="ex_cargo" class="form-control"></div>
+    <div class="form-group col-md-5"><label>Período</label><input type="text" name="ex_periodo" class="form-control"></div>
+</div>
+
+<div class="form-group" ><label>Funções desempenhadas?</label><textarea name="ex_funcoes" class="form-control"></textarea></div>
+
+<h3>Interesses</h3>
+
+<div class="row">
+    <div class="form-group col-md-7"><label>Cargo</label><input type="text" name="in_cargo" class="form-control"></div>
+    <div class="form-group col-md-5"><label>Área de atuação</label><input type="text" name="in_area" class="form-control"></div>
+</div>
+
+<div class="form-group"><label>Porque gostaria de trabalhar conosco?</label><textarea name="in_porque" class="form-control"></textarea></div>
+
+<div class="text-right">
+    <button type="submit" class="btn btn-lg btn-danger">
+	<i class="fa fa-send"></i>
+	Enviar
+    </button>
+</div>
+
+<?= form_close(); ?>

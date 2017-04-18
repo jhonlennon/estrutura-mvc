@@ -296,7 +296,7 @@ function apply_masks(Container) {
             var primeiro_numero_ddd = tmp.slice(0, 1);
             var primeiro_numero = tmp[2];
 
-            if (tmp.length === 11 && (primeiro_numero_ddd === '1' || primeiro_numero_ddd === '2') && primeiro_numero === '9') {
+            if (tmp.length === 11 && primeiro_numero === '9') {
                 $(this).unmask();
                 $(this).val(tmp);
                 $(this).mask("(99) 99999-999?9");
@@ -304,7 +304,7 @@ function apply_masks(Container) {
                 $(this).unmask();
                 $(this).val(tmp);
                 $(this).mask("9999-999999?9");
-            } else if (tmp.length === 10 && (primeiro_numero_ddd === '1' || primeiro_numero_ddd === '2') && primeiro_numero === '9') {
+            } else if (tmp.length === 10 && primeiro_numero === '9') {
                 $(this).unmask();
                 $(this).val(tmp);
                 $(this).mask("(99) 9999-9999?9");

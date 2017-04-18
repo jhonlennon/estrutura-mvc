@@ -1,0 +1,22 @@
+<div class="container" >
+    <section>
+	<h1 class="page-title" ><?= $title ?></h1>
+	<div class="row" >
+	    <div class="col-md-10 col-md-offset-1" >
+		<div class="row" >
+		    <div class="col-md-4 hidden-sm hidden-xs" >
+			<ul class="contato-menu" >
+			    <li><a class="<?= @$contato ?>" href="<?= url('contato') ?>" >Contato</a></li>
+			    <li><a class="<?= @$localizacao ?>" href="<?= url('contato/localizacao') ?>" >Localização</a></li>
+			    <li><a class="<?= @$trabalhe ?>" href="<?= url('contato/trabalheconosco') ?>" >Trabalhe Conosco</a></li>
+			    <li><a class="<?= @$orcamento ?>" href="<?= url('contato/orcamento') ?>" >Orçamento</a></li>
+			</ul>
+		    </div>
+		    <div class="col-md-8" >
+			<?= $body ?>
+		    </div>
+		</div>
+	    </div>
+	</div>
+    </section>
+</div>

@@ -1,0 +1,27 @@
+<?php
+    /* @var $v PaginaVO */
+
+    Seo::setTitle($v->getTitle());
+    Seo::setDescription($v->getDescricao());
+    Seo::setKeywords($v->getKeywords());
+
+    $imagens = $v->imgList();
+
+    foreach ($imagens as $img) {
+	if ($info = $img->getSourceInfo()) {
+	    if ($info[0] >= 200 and $info[1] >= 200) {
+		Seo::addImage($img->getSource(true), $info[0], $info[1], $info['mime']);
+	    }
+	}
+    }
+?><div class="container" >
+    <section>
+	<h1 class="page-title" ><?= $v->getTitle() ?></h1>
+	<div class="row" >
+	    <div class="col-md-10 col-md-offset-1" >
+		<?= $v->getTexto() ?>
+		<div class="divider-30" ></div>
+	    </div>
+	</div>
+    </section>
+</div>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <?php
+            /* @var $img ImagemVO */
+            Seo::displayHeader();
+        ?>
+
+        <style>
+
+            .galeria, .galeria .imagem { margin: 0; padding: 0; display: block; font-family: cursive; }
+            .galeria .imagem { float: left; position: relative; -webkit-transition: background-color 0.2s ease-in-out; -moz-transition: background-color 0.2s ease-in-out; transition: background-color 0.2s ease-in-out; outline: 1px dashed #ededed; outline-offset: -10px; }
+            .galeria .imagem:hover { background-color: rgba(0,0,0,0.1); }
+            .galeria .imagem .content { min-height: 0; height: calc(100% - 20px); margin: 10px; width: auto !important; }
+            .galeria .imagem .box-image { height: 100%; -webkit-transition: opacity 0.2s ease-in-out; -moz-transition: opacity 0.2s ease-in-out; transition: opacity 0.2s ease-in-out; background-position: center; background-size: cover; }
+            .galeria .imagem.inativo .box-image { opacity: 0.7; filter: alpha(opacity=7); }
+            .galeria .imagem .btn-group { position: absolute; bottom: 5px; right: 5px;}
+            .galeria .imagem.add { cursor: pointer; }
+            .galeria .imagem.add .content { height: 100px; }
+            .galeria .imagem.add .btn { position: absolute; top: 50%; left: 50%; margin: -17px 0 0 -52px; }
+            
+            .adminpage .modal-content { position: relative; }
+            .adminpage.adminpage-loading .modal-content:before { content: ''; background: url('<?=source('dashboard/images/loadingImage.gif')?>') no-repeat center; background-size: 50px;  z-index: 100; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; background-color: rgba(0,0,0,0.8); position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+        </style>
+
+    </head>
+    <body>
+
+    <li class="imagem add block-sizing" >
+        <div>
+            <div class="content block-sizing" >
+                <div class="block-sizing" >
+                    <div class="text-center" >
+                        <button type="button" class="btn btn-link" >
+                            <i class="fa fa-plus-circle" ></i>
+                            Adicionar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+
+    <ul class="galeria clearfix" ></ul>
+
+    <?php
+        echo form([
+            'id' => 'form-insert',
+            'class' => '',
+            'data-adminpage' => [
+                'searchValues' => ['ref' => inputGet('ref'), 'refid' => inputGet('refid')],
+                'saveValues' => ['ref' => inputGet('ref'), 'refid' => inputGet('refid')],
+                'container' => 'ul.galeria',
+                'controller' => 'imagens',
+            ]], tpl_modal('Salvar imagem', formInput('id', null, 'hidden')
+                        . (new Grid12)
+                                ->addColumn(formLabel('Título', formInput('title')))
+                                ->addColumn(formLabel('Legenda', formTextarea('legenda'))), (new Grid12)
+                                ->addColumn(formButtonFile('<i class="fa fa-image" ></i> Imagem', 'imagem', 'image/*'), 6, null, ['class' => 'text-left'])
+                                ->addColumn(formButton('Salvar'), 6), 'formGaleria', null, 'md'));
+    ?>
+
+
+    <?php Seo::displayFooter() ?>
+    <script><!--
+
+        var imgAdd = $('.imagem.add').remove();
+        var galeria = $('.galeria');
+        var defValues = {ref: '<?= inputGet('ref') ?>', refid: '<?= inputGet('refid') ?>'};
+        var form = $('#form-insert');
+
+        $('.model').each(function () {
+            $(body).prepend($(this));
+        });
+
+        form.on('searchComplete', function () {
+            galeria.prepend(imgAdd);
+            galeria.find('.imagem').addClass('col-lg-2 col-md-2 col-sm-2 col-xs-4');
+            $(window).resize();
+        });
+
+        $(window).resize(function () {
+            setTimeout(function () {
+                var imagens = galeria.find(".imagem");
+                imagens.stop().height(imagens.first().width());
+            }, 10);
+        });
+
+        function reloadLista() {
+            form.trigger('search');
+            $('#formGaleria').modal('hide');
+        }
+
+        form.on('success', function (event, e) {
+            if (e.result == 1) {
+                reloadLista();
+            } else {
+                alert(e.msg);
+            }
+        });
+
+        galeria.on('click', '.imagem.add', novaImagem);
+
+        function novaImagem() {
+            form.find('[name], [data-name]').val('');
+            form.find('[type=file]').attr({'name': 'imagem[]', 'multiple': true, 'require': true});
+            form.find(".form-title").html('Nova imagem');
+            $('#formGaleria').modal('show');
+        }
+
+        galeria.on('click', '.imagem[data-id] [data-action="excluir"]', function () {
+            if (confirm('Deseja excluir essa imagem?')) {
+                var box = $(this).parents('.imagem[data-id]');
+                var id = box.attr('data-id');
+                var values = defValues;
+                box.addClass('no-mouse');
+                values.id = id;
+                $.post('<?= url('imagens/excluir') ?>', values);
+                box.stop().animate({opacity: 0}, 'fast', function () {
+                    $(this).remove();
+                });
+            }
+        });
+
+        galeria.on('click', '.imagem[data-id] [data-action="status"]', function () {
+            var box = $(this).parents('.imagem[data-id]');
+            var id = box.attr('data-id');
+            var icon = $(this).children().toggleClass('fa-eye-slash fa-eye');
+            var values = defValues;
+            values.id = id;
+            if (icon.hasClass('fa-eye-slash')) {
+                values.status = 0;
+                box.addClass('inativo');
+            } else {
+                values.status = 1;
+                box.removeClass('inativo');
+            }
+
+            $.post('<?= url('imagens/status') ?>', values);
+
+        });
+
+        galeria.on('click', '.imagem[data-id] [data-action="editar"]', function () {
+            var values = $.parseJSON($(this).attr('data-values'));
+            form.setValues(values);
+            $('#formGaleria').modal();
+            form.find(".form-title").html('Editar imagem');
+            form.find('[type=file]').attr({'multiple': false, 'name': 'imagem', 'require': false});
+        });
+
+        galeria.sortable({
+            items: 'li.imagem[data-id]',
+            cancel: '',
+            handle: '.box-image',
+            update: function (e) {
+                var values = defValues;
+                values.imagens = [];
+                galeria.find('li.imagem[data-id]').each(function () {
+                    values.imagens.push($(this).attr('data-id'));
+                });
+                $.post('<?= url('imagens/ordenar') ?>', values);
+            }
+        });
+
+--></script>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+<?php view_load('inc/slideshow') ?>
+<div class="container" >
+    <section>
+	<h1 class="page-title" ><img src="<?= source('img/icon-chart.png') ?>" /> Últimas Obras</h1>
+	<div class="row" >
+	    <div class="col-md-9" >
+		<div class="row row-padding-0" >
+		    <?php
+			foreach ((new PaginasModel)->Lista("WHERE a.status = 1 AND a.ref = 'obras' ORDER BY rand() LIMIT 3") as $v) {
+			    $link = $v->getTexto() ? url('obras/ver', [$v->getId(), $v->getTitle()]) : null;
+			    ?>
+			    <div class="col-sm-4" >
+				<article class="home-obra" style="background-image: url('<?= $v->imgCapa()->getSource(true) ?>');" >
+				    <a <?php if ($link) echo 'href="' . $link . '"'; ?> class="home-obra-content" >
+					<header>
+					    <h1 class="home-obra-title" ><?= $v->getTitle() ?></h1>
+					</header>
+				    </a>
+				</article>
+			    </div>
+    <?php } ?>
+		</div>
+	    </div>
+	    <div class="col-md-3" >
+		<a href="<?= url('lojaonline') ?>" class="btn-home primary" >
+		    <img src="<?= source('img/conheca-nossa-loja.png') ?>" />
+		</a>
+		<a href="<?= url('contato/trabalheconosco') ?>" class="btn-home danger" >
+		    <img src="<?= source('img/trabalhe-conosco.png') ?>" />
+		</a>
+		<a href="<?= url('contato/orcamento') ?>" class="btn-home default" >
+		    <img src="<?= source('img/faca-seu-orcamento.png') ?>" />
+		</a>
+	    </div>
+	</div>
+    </section>
+</div>

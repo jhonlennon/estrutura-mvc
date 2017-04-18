@@ -1,0 +1,46 @@
+<div class="container" >
+
+    <h2 class="page-title" >Obras</h2>
+
+    <section class="obra-content" >
+	<h1 class="obra-title" ><?= $v->getTitle() ?></h1>
+	<div class="row" >
+	    <div class="col-md-<?= $imagens ? 6 : 12 ?>" >
+		<?= $v->getTexto() ?>
+	    </div>
+	    <div class="col-md-6 <?= $imagens ? 'show' : 'hide' ?>" >
+		<div class="galeria" >
+		    <?php
+			foreach ($imagens as $i => $img) {
+			    echo '<a href="' . $img->getSource(true) . '" class="galeria-link" >';
+			    if ($i) {
+				echo '<img src="' . $img->redimensiona(280, 210) . '" class="img-responsive" />';
+			    } else {
+				echo '<img src="' . $img->getSource(true) . '" class="img-responsive" />';
+			    }
+			    echo '</a>';
+			}
+		    ?>
+		</div>
+	    </div>
+	</div>
+    </section>
+    <section>	
+	<div class="row" >
+	    <?php
+		if ($obras->getCount()) {
+		    echo '<div class="col-md-10 col-md-offset-1" >'
+		    . '<h1 class="page-title ultimas" >Últimas Obras</h1>';
+		    foreach ($obras->getRegistros() as $v) {
+			view_load('tpl/obra', ['v' => $v]);
+		    }
+		    echo '<div class="text-right" >'
+		    . $obras->display($link)
+		    . '</div>'
+		    . '</div>';
+		}
+	    ?>
+	</div>
+    </section>
+
+</div>

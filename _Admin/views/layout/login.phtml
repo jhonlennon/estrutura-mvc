@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+
+	<?php
+	    Seo::setTitle('Área Restrita');
+
+	    Seo::addCss(source('_cdn/bootstrap/css/bootstrap.min.css'));
+	    Seo::addCss(source('_cdn/fonts/font-awesome/css/font-awesome.min.css'));
+	    Seo::addCss(source('_dashboard/dist/css/AdminLTE.css'));
+	    Seo::addCss(source('_dashboard/plugins/iCheck/square/blue.css'));
+
+	    Seo::addJs(source('_cdn/js/jquery.min.js'));
+	    Seo::addJs(source('_cdn/bootstrap/js/bootstrap.min.js'));
+	    Seo::addJs(source('_cdn/js/modernizr.min.js'));
+	    Seo::addJs(source('_cdn/js/fastclick.js'));
+	    Seo::addJs(source('_cdn/js/jquery.serializeObject.js'));
+	    Seo::addJs(source('_cdn/js/jquery.form.js'));
+	    Seo::addJs(source('_cdn/js/admin.js'));
+
+	    Seo::displayHeader();
+	?>
+
+
+    </head>
+
+    <body class="login-page">
+
+        <div class="login-box">
+
+            <div class="login-logo">
+                <b>Sercons</b>
+            </div>
+
+            <div class="login-box-body">
+
+                <form id="form-login" method="post" enctype="multipart/form-data" >
+
+                    <div class="form-content" >
+
+                        <p class="login-box-msg" >Informe sua credenciais.</p>
+
+                        <input type="hidden" name="logIn" value="AcessarAdmin" />
+
+                        <div class="form-group has-feedback">
+                            <input type="text" name="login" class="form-control" placeholder="Login" pattern="[a-zA-Z0-9]{5,20}" maxlength="20" required="" />
+                            <span class="glyphicon glyphicon-envelope form-control-feedback" ></span>
+                        </div>
+
+                        <div class="form-group has-feedback">
+                            <input type="password" name="senha" class="form-control" placeholder="Senha" pattern="[a-zA-Z0-9]{5,20}" maxlength="20" required="" />
+                            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-4 col-xs-offset-8">
+                                <button type="submit" class="btn btn-primary btn-block btn-flat"><i class="fa fa-sign-in" ></i> Entrar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+	<?php Seo::displayFooter(); ?>
+        <script type="text/javascript" >
+            $('#form-login').adminpage({
+                'insertAction': '',
+                'autoSearch': false,
+                'reloadSuccess': true,
+            });
+        </script>
+
+    </body>
+</html>

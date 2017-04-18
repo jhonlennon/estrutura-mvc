@@ -1,0 +1,14 @@
+<article class="tpl-servico" title="<?= htmlspecialchars($v->getTitle()) ?>" >
+    <div class="tpl-servico-content" >
+	<h1 class="tpl-servico-title" ><i class="fa fa-square" ></i> <?= $v->getTitle() ?></h1>
+	<div class="row" >
+	    <div class="col-md-3" >
+		<img src="<?= $v->imgCapa()->getSource(true) ?>" class="img-responsive" />
+		<div class="divider-10" ></div>
+	    </div>
+	    <div class="col-md-9" >
+		<?= $v->getTexto() ?>
+	    </div>
+	</div>
+    </div>
+</article>

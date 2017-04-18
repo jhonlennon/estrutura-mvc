@@ -1,0 +1,6 @@
+<article class="tpl-parceiro" title="<?= htmlspecialchars($v->getNome()) ?>" >
+    <h1 class="hide" ><?= $v->getNome() ?></h1>
+    <a <?= $v->getLink() ? "href='' target='_blank'" : null ?> >
+	<img src="<?= $v->imgCapa()->getSource(true) ?>" alt="Logo do parceiro <?= htmlspecialchars($v->getNome()) ?>" />
+    </a>
+</article>

@@ -1,0 +1,20 @@
+<div class="slideshow" >
+    <div class="slideshow-itens" data-animabanners=".tpl-slideshow" data-controls=".slideshow-controls ul" ><?php
+	    $banners = (new BannersModel)->Busca([
+			'status' => 1,
+			'data' => date('Y-m-d'),
+			'dia' => date('w'),
+			    ], 1, 5)->getRegistros();
+
+	    foreach ($banners as $v) {
+		view_load('tpl/slideshow', ['v' => $v]);
+	    }
+	?></div>
+    <div class="slideshow-controls" ><?php
+	    echo '<ul>';
+	    foreach ($banners as $i => $v) {
+		echo '<li>' . ($i + 1) . '</li>';
+	    }
+	    echo '</ul>';
+	?></div>
+</div>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+	<?php Seo::displayHeader() ?>
+
+	<style>
+
+	    html, body { min-height: 100%; }
+	    #mapa { width: 100%; height: 100%; background-color: #ededed; position: absolute; }
+
+	</style>
+
+    </head>
+    <body>
+
+	<div id="mapa" >Mapa</div>
+
+	<?php Seo::displayFooter() ?>
+
+	<script>
+
+            var map = new GMaps({
+                div: '#mapa',
+                lat: <?= (float) inputGet('latitude') ?>,
+                lng: <?= (float) inputGet('longitude') ?>,
+                zoom: <?= (float) inputGet('zoom') ?>,
+            });
+
+            var marker = map.addMarker({
+                lat: 0,
+                lng: 0,
+            });
+
+            function getPosition() {
+                return {
+                    latitude: map.getCenter().lat(),
+                    longitude: map.getCenter().lng(),
+                    zoom: map.getZoom(),
+                };
+            }
+
+            setInterval(function () {
+                marker.setPosition(new google.maps.LatLng(map.getCenter().lat(), map.getCenter().lng()));
+            }, 100);
+
+	</script>
+
+    </body>
+</html>

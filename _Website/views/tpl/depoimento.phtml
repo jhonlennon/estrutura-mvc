@@ -1,0 +1,13 @@
+<article class="tpl-depoimento" >
+    <div class="row" >
+	<div class="col-xs-3" >
+	    <img src="<?= $v->imgCapa()->getSource(true) ?>" alt="<?= htmlspecialchars($v->getNome()) ?>" class="center-block tpl-depoimento-foto" />
+	</div>
+	<div class="col-xs-9" >
+	    <div class="tpl-depoimento-mensagem" >
+		<?= nl2br($v->getDepoimento()) ?>
+		<h1 class="tpl-depoimento-nome" ><?= $v->getNome() ?></h1>
+	    </div>
+	</div>
+    </div>
+</article>

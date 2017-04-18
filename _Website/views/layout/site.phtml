@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <?php Seo::displayHeader() ?>
+
+</head>
+<body class="clearfix <?= $class ?>">
+
+<h1 class="hide"><?= Seo::getTitle() ?></h1>
+
+<button class="btn btn-default btn-hamburguer hidden-lg hidden-md" data-toggle-class="body,menu-visible">
+    <i class="fa fa-bars"></i>
+</button>
+
+<header class="topo">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <a href="<?= url() ?>" class="topo-brand">
+                    <img src="<?= source('img/logomarca.png') ?>" class="topo-brand-img"/>
+                </a>
+            </div>
+            <div class="col-md-7 topo-menu">
+
+                <a href="<?= $site->getFacebook() ?>" target="_blank" class="fa-stack fa-lg hidden-xs hidden-sm">
+                    <i class="fa fa-stack-2x fa-square"></i>
+                    <i class="fa fa-stack-1x fa-facebook"></i>
+                </a>
+
+                <div class="text-center hidden-sm hidden-xs">
+                    <div class="topo-telefone">
+                        Atendimento por telefone ligue
+                        <span><?= preg_replace('/^\(([0-9]{2})\) ([0-9]{4,5}).([0-9]{4})/', '<small>$1</small> $2.$3', $site->getTelefone()) ?></span>
+                    </div>
+                </div>
+
+                <ul class="menu">
+                    <li class="hidden-md hidden-lg topo-menu-header"><i class="fa fa-bars"></i> Menu</li>
+                    <li><a href="<?= url('institucional') ?>">Institucional</a></li>
+                    <li><a href="<?= url('comofunciona') ?>">Como Funciona</a></li>
+                    <li><a href="<?= url('servicos') ?>">Serviços</a></li>
+                    <!-- <li><a href="<?= url('lojaonline') ?>" target="_blank" >Loja Online</a></li> -->
+                    <li><a href="<?= url('contato') ?>">Contato</a></li>
+                    <li class="hidden-lg hidden-md"><a href="<?= url('contato/localizacao') ?>">Localização</a></li>
+                    <li class="hidden-lg hidden-md"><a href="<?= url('contato/trabalheconosco') ?>">Trabalhe Conosco</a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="main"><?= $body ?></div>
+
+<section class="parceiros hidden-sm hidden-xs">
+    <h1 class="hide">Nossos Parceiros</h1>
+    <div class="container">
+        <div class="row row-padding-0"><?php
+            foreach ((new ParceirosModel)->Lista('WHERE a.status = 1 ORDER BY rand() LIMIT 4') as $v) {
+                echo '<div class="col-md-3" >'
+                    . view_load('tpl/parceiro', ['v' => $v], true)
+                    . '</div>';
+            }
+            ?></div>
+    </div>
+</section>
+
+<footer class="rodape">
+    <section class="rodape-depoimentos visible-md visible-lg">
+        <h1 class="hide">Depoimentos</h1>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-offset-1 col-md-10">
+                    <div class="owl"><?php
+                        foreach ((new DepoimentosModel)->Lista('WHERE a.status = 1 ORDER BY rand() LIMIT 5') as $v) {
+                            view_load('tpl/depoimento', ['v' => $v]);
+                        }
+                        ?></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="rodape-menu hidden-xs hidden-sm">
+        <div class="container">
+            <ul class="menu">
+                <li><a href="<?= url('institucional') ?>">Home</a></li>
+                <li><a href="<?= url('institucional') ?>">Institucional</a></li>
+                <li><a href="<?= url('comofunciona') ?>">Como Funciona</a></li>
+                <li><a href="<?= url('servicos') ?>">Serviços</a></li>
+                <!-- <li><a href="<?= url('lojaonline') ?>">Loja Online</a></li> -->
+                <li><a href="<?= url('contato/trabalheconosco') ?>">Trabalhe Conosco</a></li>
+                <li><a href="<?= url('contato/orcamento') ?>">Orçamento</a></li>
+                <li><a href="<?= url('contato/localizacao') ?>">Localização</a></li>
+                <li><a href="<?= url('contato') ?>">Contato</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="rodape-direitos">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <a href="<?= url() ?>" class="rodape-brand">
+                        <img src="<?= source('img/logomarca.png') ?>" class="center-block"/>
+                    </a>
+                </div>
+                <div class="col-md-5">
+                    <div class="info telefones">
+                        <i class="fa fa-phone"></i>
+                        <?php
+
+                        if ($site->getTelefone())
+                            echo preg_replace('/^\(([0-9]{2})\) ([0-9]{4,5}).([0-9]{4,5})/', '<span>$1</span> $2.$3', $site->getTelefone());
+
+                        if ($site->getTelefone() and $site->getCelular()) {
+                            echo ' / ';
+                        }
+
+                        if ($site->getCelular())
+                            echo preg_replace('/^\([0-9]{2}\) ([0-9]{4,5}).([0-9]{4,5})/', '$1.$2', $site->getCelular());
+
+                        ?>
+                    </div>
+                    <div class="info">
+                        <i class="fa fa-map-marker"></i>
+                        <?= "{$site->getLogradouro()}, {$site->getNumero()} - {$site->getCidadeTitle()}/{$site->getUf()}" ?>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="info">
+				<span class="fa-stack">
+				    <i class="fa fa-stack-2x fa-square"></i>
+				    <i class="fa fa-stack-1x fa-facebook"></i>
+				</span>
+                        /sercons
+                    </div>
+                    <div class="info">
+                        <i class="fa fa-envelope"></i>
+                        <?= $site->getEmail() ?>
+                    </div>
+                </div>
+            </div>
+            <p class="text-center direitos">©<?= date('Y') . ' ' . $site->getTitle() ?>.<br>Todos os direitos
+                reservados.</p>
+        </div>
+    </div>
+</footer>
+
+<?php Seo::displayFooter() ?>
+
+</body>
+</html>
